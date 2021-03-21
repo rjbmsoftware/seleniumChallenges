@@ -1,0 +1,6 @@
+version: '3'
+services:
+  theInternetApp:
+    image: gprestes/the-internet
+    ports:
+      - 7080:5000

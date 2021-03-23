@@ -22,7 +22,7 @@ public class HomePage extends BasePage {
     }
 
     public HomePage goToURL() {
-        getWebDriver().get(BasePage.getUrl());
+        getWebDriver().get(super.getUrl());
         PageFactory.initElements(getWebDriver(), this);
         return this;
     }

@@ -8,13 +8,17 @@ public class DriverFactory {
 
     public WebDriver getDriver() {
         String operatingSystem = System.getProperty("os.name");
-
+        String driverPath;
         if (operatingSystem.startsWith("Windows")) {
-            String driverPath = Paths.get("src", "main",
+             driverPath = Paths.get("src", "main",
                                         "resources", "drivers",
                                         "windows", "geckodriver.exe").toFile().getAbsolutePath();
-            System.setProperty("webdriver.gecko.driver", driverPath);
+        } else {
+            driverPath = "build/resources/main/drivers/mac/geckodriver";
         }
+
+        System.setProperty("webdriver.gecko.driver", driverPath);
+
 
         WebDriver webDriver = new FirefoxDriver();
         webDriver.manage().window().maximize();

@@ -37,4 +37,9 @@ public class AddRemoveElementPage extends BasePage {
         getWebDriver().get(URL);
         return this;
     }
+
+    public AddRemoveElementPage clickDeleteButton() {
+        deleteButtons.get(0).click();
+        return this;
+    }
 }

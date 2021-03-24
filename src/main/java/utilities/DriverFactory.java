@@ -1,3 +1,5 @@
+package utilities;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -10,8 +12,9 @@ public class DriverFactory {
         String operatingSystem = System.getProperty("os.name");
         String driverPath;
         if (operatingSystem.startsWith("Windows")) {
-             driverPath = Paths.get("src", "main",
-                                        "resources", "drivers",
+
+             driverPath = Paths.get("build","resources",
+                                        "main", "drivers",
                                         "windows", "geckodriver.exe").toFile().getAbsolutePath();
         } else {
             driverPath = "build/resources/main/drivers/mac/geckodriver";

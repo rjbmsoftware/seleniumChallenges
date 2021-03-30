@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class HomePage extends BasePage {
+public class HomePage extends BasePage<HomePage> {
     @FindBy(css = "ul > li")
     List<WebElement> contentLinks;
 
@@ -19,11 +19,5 @@ public class HomePage extends BasePage {
 
     public List<String> getContentLinks() {
         return contentLinks.stream().map(WebElement::getText).collect(Collectors.toList());
-    }
-
-    public HomePage goToURL() {
-        getWebDriver().get(super.getUrl());
-        PageFactory.initElements(getWebDriver(), this);
-        return this;
     }
 }

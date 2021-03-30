@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class CheckboxesPage extends BasePage {
+public class CheckboxesPage extends BasePage<CheckboxesPage> {
 
     @FindBy(xpath = ".//form/input[1]")
     WebElement checkBoxOne;
@@ -17,12 +17,6 @@ public class CheckboxesPage extends BasePage {
         super(webDriver);
         super.setUrl(super.getUrl() + "checkboxes");
         PageFactory.initElements(webDriver, this);
-    }
-
-    public CheckboxesPage goToURL() {
-        getWebDriver().get(getUrl());
-        PageFactory.initElements(getWebDriver(), this);
-        return this;
     }
 
     public CheckboxesPage flipCheckBoxOne() {

@@ -3,9 +3,8 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-public class BasicAuthPage extends BasePage {
+public class BasicAuthPage extends BasePage<BasicAuthPage> {
     public final String endPath = "basic_auth/";
     public final String URL = super.getUrl() + endPath;
 
@@ -26,9 +25,8 @@ public class BasicAuthPage extends BasePage {
     public BasicAuthPage goToURL(String username, String password) {
         String prefix = username + ":" + password + "@";
         String newUrl = prefix + this.URL;
-        getWebDriver().get(newUrl);
-        PageFactory.initElements(getWebDriver(), this);
-        return this;
+
+        return this.setUrl(newUrl).goToURL();
     }
 
     public boolean isLoggedIn() {

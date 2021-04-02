@@ -2,15 +2,17 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import utilities.DragDropHTML5;
 
 public class DragDropPage extends BasePage<DragDropPage> {
+    private final String boxAId = "#column-a";
+    private final String boxBId = "#column-b";
 
-    @FindBy(id = "column-a")
+    @FindBy(css = boxAId)
     WebElement boxA;
 
-    @FindBy(id = "column-b")
+    @FindBy(css = boxBId)
     WebElement boxB;
 
     public DragDropPage(WebDriver webDriver) {
@@ -27,13 +29,7 @@ public class DragDropPage extends BasePage<DragDropPage> {
     }
 
     public DragDropPage dragAToB() {
-        Actions action = new Actions(getWebDriver());
-        action.clickAndHold(boxA)
-                .moveToElement(boxB)
-                .release(boxA)
-                .build()
-                .perform();
-
+        DragDropHTML5.dragAndDrop(getWebDriver(), boxAId, boxBId);
         return this;
     }
 }

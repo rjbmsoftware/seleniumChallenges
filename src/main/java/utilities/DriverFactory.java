@@ -13,9 +13,9 @@ public class DriverFactory {
         String driverPath;
         if (operatingSystem.startsWith("Windows")) {
 
-             driverPath = Paths.get("build","resources",
-                                        "main", "drivers",
-                                        "windows", "geckodriver.exe").toFile().getAbsolutePath();
+            driverPath = Paths.get("build", "resources",
+                    "main", "drivers",
+                    "windows", "geckodriver.exe").toFile().getAbsolutePath();
         } else {
             driverPath = "build/resources/main/drivers/mac/geckodriver";
         }

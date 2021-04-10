@@ -2,24 +2,22 @@ import baseTest.BaseTest;
 import org.junit.jupiter.api.Test;
 import pages.UploadPage;
 
-import java.io.FileNotFoundException;
-import java.net.URL;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UploadImageTest extends BaseTest {
 
     @Test
-    public void uploadSuccessFileNameDisplayed() throws FileNotFoundException {
+    public void uploadSuccessFileNameDisplayed() throws URISyntaxException {
         String imageFilename = "greenPixel.png";
-        URL url = ClassLoader.getSystemClassLoader().getResource(imageFilename);
-        String path;
-
-        if (url != null) {
-            path = url.getPath();
-        } else {
-            throw new FileNotFoundException(imageFilename + " not available");
-        }
+        URI uri = Objects.requireNonNull(ClassLoader.getSystemClassLoader()
+                .getResource(imageFilename))
+                .toURI();
+        String path = Path.of(uri).toString();
 
         UploadPage uploadPage = new UploadPage(getWebDriver()).goToURL()
                 .setUploadImagePath(path)

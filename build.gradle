@@ -20,7 +20,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
-    maxParallelForks = (int) (Runtime.runtime.availableProcessors() / 2)
+//    maxParallelForks = (int) (Runtime.runtime.availableProcessors() / 2)
+    maxParallelForks = 4
 }
 
 test.dependsOn("startApp")

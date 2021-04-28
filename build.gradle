@@ -27,6 +27,7 @@ test {
 test.dependsOn("startApp")
 //test.finalizedBy("stopApp")
 def setupPath = [getProjectDir().toString(), 'src', 'main', 'setupApp.yaml'].join(File.separator)
+def gridPath = [getProjectDir().toString(), 'src', 'main', 'gridAndNodesSetup.yaml'].join(File.separator)
 
 tasks.register("startApp") {
     exec {
@@ -39,5 +40,19 @@ tasks.register("stopApp") {
     exec {
         executable "docker-compose"
         args "-f", setupPath, "down"
+    }
+}
+
+tasks.register("startGrid") {
+    exec {
+        executable "docker-compose"
+        args "-f", gridPath,  "up", "--detach", "--scale", "firefoxNode=2"
+    }
+}
+
+tasks.register("stopGrid") {
+    exec {
+        executable "docker-compose"
+        args "-f", gridPath, "down"
     }
 }

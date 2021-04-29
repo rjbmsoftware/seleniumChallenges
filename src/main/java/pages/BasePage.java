@@ -6,7 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 public abstract class BasePage<T> {
 
     private final WebDriver webDriver;
-    private String URL = "localhost:7080/";
+//    private String URL = "localhost:7080/";
+    private String URL = "http://the-internet.herokuapp.com/";
 
     public BasePage(WebDriver webDriver) {
         this.webDriver = webDriver;

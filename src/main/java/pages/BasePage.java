@@ -6,8 +6,9 @@ import org.openqa.selenium.support.PageFactory;
 public abstract class BasePage<T> {
 
     private final WebDriver webDriver;
-//    private String URL = "localhost:7080/";
-    private String URL = "http://the-internet.herokuapp.com/";
+//    private String URL = "localhost:7080/"; // running locally
+    private String URL = "theInternetApp:5000/"; // running with grid (must match docker compose file)
+//    private String URL = "http://the-internet.herokuapp.com/"; // without local instance
 
     public BasePage(WebDriver webDriver) {
         this.webDriver = webDriver;

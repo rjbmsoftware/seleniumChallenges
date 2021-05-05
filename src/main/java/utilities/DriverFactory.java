@@ -14,8 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class DriverFactory {
 
     public WebDriver getDriver() {
-//        return getRemoteDriver();
-        return getLocalDriver();
+        return PropertiesManager.isLocalRunMode() ? getLocalDriver() : getRemoteDriver();
     }
 
     private WebDriver getRemoteDriver() {

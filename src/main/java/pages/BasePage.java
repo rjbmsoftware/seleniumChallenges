@@ -2,13 +2,12 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import utilities.PropertiesManager;
 
 public abstract class BasePage<T> {
 
     private final WebDriver webDriver;
-//    private String URL = "localhost:7080/"; // running locally
-    private String URL = "theInternetApp:5000/"; // running with grid (must match docker compose file)
-//    private String URL = "http://the-internet.herokuapp.com/"; // without local instance
+    private String URL = PropertiesManager.getURL();
 
     public BasePage(WebDriver webDriver) {
         this.webDriver = webDriver;

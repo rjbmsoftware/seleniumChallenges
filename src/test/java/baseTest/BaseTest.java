@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import utilities.DriverFactory;
 
-public class BaseTest {
+public abstract class BaseTest {
     private WebDriver webDriver;
 
     @BeforeEach

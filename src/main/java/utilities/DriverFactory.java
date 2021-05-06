@@ -14,7 +14,10 @@ import java.util.concurrent.TimeUnit;
 public class DriverFactory {
 
     public WebDriver getDriver() {
-        return PropertiesManager.isLocalRunMode() ? getLocalDriver() : getRemoteDriver();
+        WebDriver webDriver = PropertiesManager.isLocalRunMode() ? getLocalDriver() : getRemoteDriver();
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        return webDriver;
     }
 
     private WebDriver getRemoteDriver() {
@@ -44,12 +47,6 @@ public class DriverFactory {
         }
 
         System.setProperty("webdriver.gecko.driver", driverPath);
-
-
-        WebDriver webDriver = new FirefoxDriver();
-        webDriver.manage().window().maximize();
-        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
-        return webDriver;
+        return new FirefoxDriver();
     }
 }

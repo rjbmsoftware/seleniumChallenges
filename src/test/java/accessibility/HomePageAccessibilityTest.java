@@ -9,9 +9,6 @@ public class HomePageAccessibilityTest extends BaseTest {
 
     @Test
     public void accessibilityTest() {
-
-//        HomePage homePage = new HomePage(getWebDriver());
-//        homePage.goToURL();
         new HomePage(getWebDriver()).goToURL().doAccessibilityReport();
     }
 }

@@ -28,14 +28,14 @@ public class HomePage extends BasePage<HomePage> {
 
     public void doAccessibilityReport() {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getWebDriver();
-        InputStream inputStream = getClass().getResourceAsStream("javaScript/axe.min.js");
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("javaScript/axe.min.js");
 
         try {
             assert inputStream != null;
             String content = new String(inputStream.readAllBytes());
             javascriptExecutor.executeAsyncScript(content);
 
-            File output = new File("path/to/report.json");
+//            File output = new File("path/to/report.json");
 //            FileWriter writer = new FileWriter(output);
             String result = String.valueOf(javascriptExecutor.executeAsyncScript("var callback = arguments[arguments.length - 1]; axe.run().then(results => callback(results));"));
             System.out.println(result);

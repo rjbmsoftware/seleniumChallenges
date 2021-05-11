@@ -1,5 +1,6 @@
 package pages;
 
+import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,13 +33,17 @@ public class HomePage extends BasePage<HomePage> {
 
         try {
             assert inputStream != null;
-            String content = new String(inputStream.readAllBytes());
-            javascriptExecutor.executeAsyncScript(content);
+            String axeJsScript = new String(inputStream.readAllBytes());
+            javascriptExecutor.executeScript(axeJsScript);
 
 //            File output = new File("path/to/report.json");
 //            FileWriter writer = new FileWriter(output);
             String result = String.valueOf(javascriptExecutor.executeAsyncScript("var callback = arguments[arguments.length - 1]; axe.run().then(results => callback(results));"));
             System.out.println(result);
+
+//            JSONObject jsonObject = new JSONObject(result);
+//            int length = jsonObject.getJSONObject("violations").length();
+//            System.out.println("help");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,14 +1,11 @@
 package pages;
 
-import org.json.JSONObject;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -27,25 +24,19 @@ public class HomePage extends BasePage<HomePage> {
         return contentLinks.stream().map(WebElement::getText).collect(Collectors.toList());
     }
 
-    public void doAccessibilityReport() {
+    public int accessibilityViolations() throws IOException {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) getWebDriver();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("javaScript/axe.min.js");
 
-        try {
-            assert inputStream != null;
-            String axeJsScript = new String(inputStream.readAllBytes());
-            javascriptExecutor.executeScript(axeJsScript);
+        assert inputStream != null;
+        String axeJsScript = new String(inputStream.readAllBytes());
+        javascriptExecutor.executeScript(axeJsScript);
 
-//            File output = new File("path/to/report.json");
-//            FileWriter writer = new FileWriter(output);
-            String result = String.valueOf(javascriptExecutor.executeAsyncScript("var callback = arguments[arguments.length - 1]; axe.run().then(results => callback(results));"));
-            System.out.println(result);
+        String numberOfViolations = String.valueOf(javascriptExecutor.executeAsyncScript(
+                "var callback = arguments[arguments.length - 1]; " +
+                        "axe.run().then(results => callback(results.violations.length));"
+        ));
 
-//            JSONObject jsonObject = new JSONObject(result);
-//            int length = jsonObject.getJSONObject("violations").length();
-//            System.out.println("help");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return Integer.parseInt(numberOfViolations);
     }
 }
